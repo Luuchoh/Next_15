@@ -1,4 +1,4 @@
-import { Fragment, Suspense } from "react"
+import { Suspense } from "react"
 import Image from "next/image"
 
 import { Heading, Text } from "@chakra-ui/react"
@@ -6,6 +6,7 @@ import { Heading, Text } from "@chakra-ui/react"
 import { Bookmark } from "@/components/bookmark"
 import { orm } from "../db"
 import { isInWhitelist } from "../utils/whitelist"
+import Loading from "./loading"
 
 export default async function Author({
   params,
@@ -62,7 +63,8 @@ export default async function Author({
       <Heading size="lg" className="mb-1 mt-14">
         Marcadores
       </Heading>
-      <Suspense fallback={<Fragment />}>
+      {/* Suspense with streaming */}
+      <Suspense fallback={<Loading />}>
         {isWhitelisted && <AuthorBookmarksById authorId={author.id} />}
       </Suspense>
     </main>
