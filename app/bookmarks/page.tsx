@@ -1,16 +1,23 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import { Heading, Text } from "@chakra-ui/react"
 
 import { Bookmark } from "@/components/bookmark"
-import { orm } from "./db"
+import { BookmarkType } from "./schema"
 
-export default async function Bookmarks() {
-  const bookmarks = await orm.query.bookmarks.findMany({
-    limit: 10,
-    with: {
-      author: true,
-    },
-  })
+export default function Bookmarks() {
 
+  const [bookmarks, setBookmarks] = useState<BookmarkType[]>([])
+
+  useEffect(() => {
+    fetch("/bookmarks/api")
+    .then((response) => response.json())
+    .then(({ data }) => {
+      setBookmarks(data)
+    })
+  }, [])
+  
   return (
     <main className="mt-12">
       <header className="">
