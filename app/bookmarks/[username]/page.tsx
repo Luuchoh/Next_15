@@ -16,6 +16,13 @@ export default async function Author({
 
   const author = await getAuthor(username)
 
+  // Design Pattern - Parallel
+  // const [author, bookmarks] = Promise.all([
+  // getAuthor(username)
+  // getBookmarksByAuthorUsername(username)
+  // ])
+
+
   if (!author) {
     return null
   }
