@@ -1,10 +1,12 @@
 "use client"
 
 import { Heading, Text } from "@chakra-ui/react"
+// import { unstable_cacheTag as cacheTag, unstable_cacheLife as cacheLife } from "next/cache";
 
 import { Bookmark } from "@/components/bookmark"
 import { useQuery } from "@tanstack/react-query"
 import { BookmarkType } from "./schema"
+
 
 export default function Bookmarks() {
   const { data: bookmarks, status } = useQuery({
@@ -17,6 +19,26 @@ export default function Bookmarks() {
         })
     },
   })
+
+  /**
+   * La cache actualmente que no satisface a los usuarios
+   */ 
+
+  // const bookmark = await fetch("http://localhost/bookmarks/api",{
+  //   cache: "force-cache",
+  //   next:{
+  //     tags:["bookmarks"]
+  //   }
+  // })
+
+  /**
+   * Experimental cache
+   */
+
+  // "use cache"
+  // cacheTag("bookmarks")
+  // cacheLife("minutes")
+  // const bookmark = await fetch("http://localhost/bookmarks/api")
 
   console.log("status", status)
 
