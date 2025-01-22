@@ -8,6 +8,11 @@ export async function addBookmark(prevState: unknown, data: FormData) {
   const url = data.get("url") as string
 
   console.log("Adding bookmark:", { title, url })
+  // Forzando un error para mostrar en la UI
+  // return { error: "Fallo en agregar el marcador en la base de datos." }
+
+  // Forzando Error no controlado
+  // throw new Error("asdasd")
 
   const value = await orm.insert(bookmarks).values({ title, url }).returning()
 

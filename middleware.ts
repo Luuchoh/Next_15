@@ -24,9 +24,7 @@ export async function middleware(request: NextRequest) {
     )
 
     // 3. Si la hay, puede continuar
-    if (hasSession) {
-      return
-    }
+    if (hasSession) return
 
     // 4. Si no, redireccionar a la página de inicio de sesión
     return NextResponse.redirect(new URL("/auth/login", request.nextUrl))
