@@ -23,7 +23,7 @@ export async function encrypt(
   return new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime(expirationTime ?? "7d")
+    .setExpirationTime(expirationTime ?? "1d")
     .sign(encodedKey)
 }
 
@@ -48,9 +48,9 @@ export async function createSession(userId: string) {
 
   _cookies.set(COOKIE_NAME, session, {
     httpOnly: true,
-    secure: true,
+    secure: true, // HTTPS | local
     expires: expiresAt,
-    sameSite: "lax",
+    sameSite: "strict", // lax -> dominios, subdominios | strict -> unicamento nuestro dominio
     path: "/",
   })
 }
